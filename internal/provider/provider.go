@@ -16,6 +16,7 @@ import (
 var (
 	envVarName          = "POSTHOG_TOKEN"
 	errMissingAuthToken = "Required token could not be found. Please set the token using an input variable in the provider configuration block or by using the `" + envVarName + "` environment variable."
+	defaultPosthogHost  = "app.posthog.com"
 )
 
 func uuidRegex() *regexp.Regexp {
@@ -33,6 +34,7 @@ type PostHogProvider struct {
 
 type PostHogProviderModel struct {
 	Token types.String `tfsdk:"token"`
+	Host  types.String `tfsdk:"host"`
 }
 
 func (p *PostHogProvider) Metadata(ctx context.Context, req provider.MetadataRequest, resp *provider.MetadataResponse) {
@@ -45,6 +47,10 @@ func (p *PostHogProvider) Schema(ctx context.Context, req provider.SchemaRequest
 		Attributes: map[string]schema.Attribute{
 			"token": schema.StringAttribute{
 				MarkdownDescription: "The token used to authenticate with PostHog.",
+				Optional:            true,
+			},
+			"host": schema.StringAttribute{
+				MarkdownDescription: "The host for the PostHog API. Defaults to `" + defaultPosthogHost + "`",
 				Optional:            true,
 			},
 		},
@@ -61,6 +67,7 @@ func (p *PostHogProvider) Configure(ctx context.Context, req provider.ConfigureR
 	}
 
 	token := ""
+	host := defaultPosthogHost
 
 	if !data.Token.IsNull() {
 		token = data.Token.ValueString()
@@ -78,9 +85,14 @@ func (p *PostHogProvider) Configure(ctx context.Context, req provider.ConfigureR
 		return
 	}
 
+	if !data.Host.IsNull() {
+		host = data.Host.ValueString()
+	}
+
 	client := http.Client{
 		Transport: &authedTransport{
 			token:   token,
+			host:    host,
 			wrapped: http.DefaultTransport,
 		},
 	}

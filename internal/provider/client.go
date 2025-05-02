@@ -10,12 +10,13 @@ import (
 
 type authedTransport struct {
 	token   string
+	host    string
 	wrapped http.RoundTripper
 }
 
 func (t *authedTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	req.URL.Scheme = "https"
-	req.URL.Host = "app.posthog.com"
+	req.URL.Host = t.host
 	req.URL.Path = "/api" + req.URL.Path
 
 	req.Header.Set("Accept", "application/json")
