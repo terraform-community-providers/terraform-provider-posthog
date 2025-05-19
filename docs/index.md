@@ -33,5 +33,5 @@ provider "posthog" {}
 
 ### Optional
 
-- `host` (String) The host for the PostHog API. Defaults to `app.posthog.com`
+- `host` (String) The host for the PostHog API. **Default** `app.posthog.com`
 - `token` (String) The token used to authenticate with PostHog.

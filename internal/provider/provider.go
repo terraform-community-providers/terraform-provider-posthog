@@ -50,7 +50,7 @@ func (p *PostHogProvider) Schema(ctx context.Context, req provider.SchemaRequest
 				Optional:            true,
 			},
 			"host": schema.StringAttribute{
-				MarkdownDescription: "The host for the PostHog API. Defaults to `" + defaultPosthogHost + "`",
+				MarkdownDescription: "The host for the PostHog API. **Default** `" + defaultPosthogHost + "`",
 				Optional:            true,
 			},
 		},
