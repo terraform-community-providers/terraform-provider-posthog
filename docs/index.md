@@ -17,6 +17,11 @@ There are several ways to provide the required token:
 * **Set the `token` argument in the provider configuration**. You can set the `token` argument in the provider configuration. Use an input variable for the token.
 * **Set the `POSTHOG_TOKEN` environment variable**. The provider can read the `POSTHOG_TOKEN` environment variable and the token stored there to authenticate.
 
+If your project is hosted outside of the PostHog Cloud US zone, you will need to pass the `host` argument to ensure the provider hits the correct API.
+
+* For the **EU Cloud** region, set `host` to `eu.posthog.com`
+* For **self-hosted** PostHog instances, set `host` to the URL of your instance
+
 ## Example Usage
 
 ```terraform
@@ -28,4 +33,5 @@ provider "posthog" {}
 
 ### Optional
 
+- `host` (String) The host for the PostHog API. **Default** `app.posthog.com`
 - `token` (String) The token used to authenticate with PostHog.
