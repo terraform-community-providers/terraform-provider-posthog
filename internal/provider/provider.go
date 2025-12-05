@@ -104,6 +104,7 @@ func (p *PostHogProvider) Configure(ctx context.Context, req provider.ConfigureR
 func (p *PostHogProvider) Resources(ctx context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
 		NewProjectResource,
+		NewExperimentResource,
 	}
 }
 

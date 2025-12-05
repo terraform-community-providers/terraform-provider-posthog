@@ -21,3 +21,7 @@ func testAccPreCheck(t *testing.T) {
 		t.Fatal("POSTHOG_TOKEN must be set for acceptance tests")
 	}
 }
+
+func testAccProjectId() string {
+	return os.Getenv("POSTHOG_PROJECT_ID")
+}
