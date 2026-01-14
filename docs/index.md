@@ -2,7 +2,9 @@
 page_title: "PostHog Provider"
 ---
 
-# PostHog Provider
+# PostHog Provider (Community) - DEPRECATED
+
+~> **DEPRECATED:** This community provider is no longer maintained. PostHog now has an [officially supported Terraform Provider](https://registry.terraform.io/providers/PostHog/posthog/latest). Please migrate to the official provider for continued support and new features.
 
 This provider is used to interact with the many resources supported by [PostHog](https://posthog.com).
 

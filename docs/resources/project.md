@@ -8,6 +8,8 @@ description: |-
 
 # posthog_project (Resource)
 
+~> **DEPRECATED:** This community provider is no longer maintained. Please use the [official PostHog Terraform Provider](https://registry.terraform.io/providers/PostHog/posthog/latest) instead.
+
 PostHog project.
 
 ## Example Usage
